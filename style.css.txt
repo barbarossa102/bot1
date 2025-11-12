@@ -1,0 +1,38 @@
+/* Используем системные шрифты, чтобы выглядеть "как родной" */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding: 20px;
+    margin: 0;
+
+    /* Эти переменные приходят из Telegram! 
+      Приложение автоматически подстроится под темную или светлую тему.
+    */
+    background-color: var(--tg-theme-bg-color, #ffffff);
+    color: var(--tg-theme-text-color, #000000);
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    color: var(--tg-theme-hint-color, #666666);
+}
+
+/* Стилизуем кнопку под Telegram */
+button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+
+    /* Используем цвета кнопки из темы Telegram 
+    */
+    background-color: var(--tg-theme-button-color, #007bff);
+    color: var(--tg-theme-button-text-color, #ffffff);
+}

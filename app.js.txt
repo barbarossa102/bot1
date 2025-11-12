@@ -1,0 +1,46 @@
+// Ждем, пока страница и скрипт Telegram загрузятся
+document.addEventListener("DOMContentLoaded", function() {
+    
+    // Получаем объект Telegram WebApp
+    const tg = window.Telegram.WebApp;
+
+    // Сразу сообщаем Telegram, что приложение готово
+    tg.ready();
+
+    // Получаем элементы со страницы
+    const userInfoElement = document.getElementById("user-info");
+    const actionButton = document.getElementById("action-button");
+
+    // --- 1. Показываем данные пользователя ---
+    // Проверяем, есть ли данные пользователя
+    if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+        const user = tg.initDataUnsafe.user;
+        // Отображаем имя (или username, если нет имени)
+        userInfoElement.innerText = `Привет, ${user.first_name || user.username}!`;
+    } else {
+        userInfoElement.innerText = "Не удалось получить данные :(";
+        console.error("User data not found in initDataUnsafe");
+    }
+
+    // --- 2. Вешаем событие на кнопку ---
+    actionButton.addEventListener("click", function() {
+        // Показываем всплывающее уведомление внутри Telegram
+        tg.showAlert("Ты нажал на кнопку!");
+
+        // Можно также отправить данные боту:
+        // tg.sendData("Button clicked!"); 
+        // (Для этого нужна серверная часть у бота)
+    });
+
+    // --- 3. Настраиваем главную кнопку Telegram ---
+    // (Это кнопка, которая появляется внизу экрана)
+    tg.MainButton.setText("Закрыть приложение");
+    tg.MainButton.show();
+
+    // При нажатии на главную кнопку...
+    tg.MainButton.onClick(function() {
+        // ...закрываем приложение
+        tg.close();
+    });
+
+});
